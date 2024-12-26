@@ -1,0 +1,27 @@
+@use "@angular/material" as mat;
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: "Montserrat",
+      density: 0,
+    )
+  );
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Montserrat", serif;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: #faf3e0;
+  margin: 0;
+}
