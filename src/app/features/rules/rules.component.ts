@@ -1,20 +1,20 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
-import { RouteNames } from '../../routes.enum';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIconButton } from '@angular/material/button';
+import { RouteNames } from '../../routes.enum';
 import { Rule } from './rule.model';
 
 @Component({
-  selector: 'app-rules',
+  selector: 'nap-rules',
   imports: [RouterLink, MatIcon, MatToolbar, MatIconButton],
   templateUrl: './rules.component.html',
   styleUrl: './rules.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RulesComponent {
-  public readonly RouteNames = RouteNames;
+  public readonly routeNames = RouteNames;
 
   public readonly rules: Rule[] = [
     {

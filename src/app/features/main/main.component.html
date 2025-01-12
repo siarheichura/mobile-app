@@ -1,12 +1,12 @@
 <div class="header">
-  <mat-icon class="header__logo" svgIcon="logo"></mat-icon>
+  <mat-icon class="header__logo" svgIcon="logo" />
 </div>
 
 <div class="body">
   <div class="buttons">
-    <button class="buttons__button" mat-flat-button [routerLink]="RouteNames.Game" disabled>Продолжить</button>
-    <button class="buttons__button" mat-flat-button [routerLink]="RouteNames.GameSettings">Новая игра</button>
-    <button class="buttons__button" mat-flat-button [routerLink]="RouteNames.Rules">Правила</button>
+    <button class="buttons__button" mat-flat-button disabled [routerLink]="routeNames.Game">Продолжить</button>
+    <button class="buttons__button" mat-flat-button [routerLink]="routeNames.GameSettings">Новая игра</button>
+    <button class="buttons__button" mat-flat-button [routerLink]="routeNames.Rules">Правила</button>
   </div>
 </div>
 

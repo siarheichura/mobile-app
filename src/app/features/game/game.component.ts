@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-game',
+  selector: 'nap-game',
   imports: [],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
