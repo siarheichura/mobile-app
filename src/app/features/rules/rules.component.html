@@ -1,1 +1,23 @@
-<button [routerLink]="RouteNames.Empty">rules works!</button>
+<mat-toolbar>
+  <button mat-icon-button [routerLink]="RouteNames.Empty">
+    <mat-icon>arrow_back_ios_new</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="header">
+  <mat-icon class="header__logo" svgIcon="logo"></mat-icon>
+
+  <div class="header__title">
+    <span class="header__name">“НАПОЙ”</span>
+    <span class="header__description">Увлекательная музыкальная игра для компании”</span>
+  </div>
+</div>
+
+<div class="body">
+  @for (rule of rules; track rule.id) {
+    <div class="rule">
+      <mat-icon class="rule__icon" [fontIcon]="rule.icon"></mat-icon>
+      <span class="rule__description">{{ rule.text }}</span>
+    </div>
+  }
+</div>

@@ -4,10 +4,12 @@ import { RouteNames } from './routes.enum';
 export const routes: Routes = [
   {
     path: RouteNames.Empty,
+    title: 'Главная',
     loadComponent: () => import('./features/main/main.component').then((c) => c.MainComponent),
   },
   {
     path: RouteNames.Rules,
+    title: 'Правила',
     loadComponent: () => import('./features/rules/rules.component').then((c) => c.RulesComponent),
   },
   {

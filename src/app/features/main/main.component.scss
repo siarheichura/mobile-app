@@ -1,11 +1,9 @@
 @use "@angular/material" as mat;
 
 :host {
-  padding: 20px 40px;
   height: 100%;
   display: grid;
   grid-template-rows: 57% 37% 6%;
-  flex-direction: column;
 }
 
 .header {
@@ -46,6 +44,12 @@
       )
     );
   }
+}
+
+.footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .by {
