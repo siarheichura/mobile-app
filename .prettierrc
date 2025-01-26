@@ -8,14 +8,27 @@
   "bracketSpacing": true,
   "overrides": [
     {
-      "files": [
-        "**/*.css",
-        "**/*.scss",
-        "**/*.html"
-      ],
+      "files": ["**/*.css", "**/*.scss", "**/*.html"],
       "options": {
         "singleQuote": false
       }
     }
-  ]
+  ],
+  "plugins": ["prettier-plugin-organize-attributes"],
+  "attributeGroups": [
+    "^\\*",
+    "^\\w+(?<!data|aria|http|let)-",
+    "^(id|\\[id\\])$",
+    "^class$",
+    "^\\[class\\.",
+    "^#",
+    "^let-",
+    "$DEFAULT",
+    "^\\[[^\\(@]",
+    "^\\[\\(",
+    "^\\(",
+    "^@",
+    "^\\[@"
+  ],
+  "attributeSort": "ASC"
 }

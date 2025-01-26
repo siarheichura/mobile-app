@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
-import { MatToolbar } from '@angular/material/toolbar';
-import { MatIconButton } from '@angular/material/button';
 import { RouteNames } from '../../routes.enum';
 import { Rule } from './rule.model';
+import { PageWrapperComponent } from '../../shared/components/page-wrapper/page-wrapper.component';
 
 @Component({
   selector: 'nap-rules',
-  imports: [RouterLink, MatIcon, MatToolbar, MatIconButton],
+  imports: [MatIcon, PageWrapperComponent],
   templateUrl: './rules.component.html',
   styleUrl: './rules.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

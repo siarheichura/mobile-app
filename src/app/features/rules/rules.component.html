@@ -1,23 +1,19 @@
-<mat-toolbar>
-  <button mat-icon-button [routerLink]="routeNames.Empty">
-    <mat-icon>arrow_back_ios_new</mat-icon>
-  </button>
-</mat-toolbar>
+<nap-page-wrapper [backButtonRoute]="routeNames.Empty" [title]="'Правила'" [withToolbar]="true">
+  <div class="header">
+    <mat-icon class="header__logo" svgIcon="logo" />
 
-<div class="header">
-  <mat-icon class="header__logo" svgIcon="logo" />
-
-  <div class="header__title">
-    <span class="header__name">“НАПОЙ”</span>
-    <span class="header__description">Увлекательная музыкальная игра для компании”</span>
-  </div>
-</div>
-
-<div class="body">
-  @for (rule of rules; track rule.id) {
-    <div class="rule">
-      <mat-icon class="rule__icon" [fontIcon]="rule.icon" />
-      <span class="rule__description">{{ rule.text }}</span>
+    <div class="header__title">
+      <span class="header__name">“НАПОЙ”</span>
+      <span class="header__description">Увлекательная музыкальная игра для компании”</span>
     </div>
-  }
-</div>
+  </div>
+
+  <div class="body">
+    @for (rule of rules; track rule.id) {
+      <div class="rule">
+        <mat-icon class="rule__icon" [fontIcon]="rule.icon" />
+        <span class="rule__description">{{ rule.text }}</span>
+      </div>
+    }
+  </div>
+</nap-page-wrapper>

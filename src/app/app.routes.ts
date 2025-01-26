@@ -13,6 +13,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/rules/rules.component').then((c) => c.RulesComponent),
   },
   {
+    path: RouteNames.TeamsSettings,
+    loadComponent: () => import('./features/teams-settings/teams-settings.component').then((c) => c.TeamsSettingsComponent),
+  },
+  {
     path: RouteNames.GameSettings,
     loadComponent: () => import('./features/game-settings/game-settings.component').then((c) => c.GameSettingsComponent),
   },
