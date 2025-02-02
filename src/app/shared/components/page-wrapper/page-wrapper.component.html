@@ -1,10 +1,27 @@
 @if (withToolbar()) {
   <mat-toolbar class="page-wrapper__toolbar">
-    <button mat-icon-button class="page-wrapper__back-button" [routerLink]="backButtonRoute()">
+    <button
+      mat-icon-button
+      class="page-wrapper__back-button"
+      [routerLink]="backButtonRoute()"
+    >
       <mat-icon>arrow_back_ios_new</mat-icon>
     </button>
 
     <span class="page-wrapper__title">{{ title() }}</span>
+
+    @if (actionButtons()) {
+      <div class="page-wrapper__action-buttons">
+        @for (button of actionButtons(); track button.icon) {
+          <button
+            mat-icon-button
+            (click)="actionButtonClicked.emit(button.action)"
+          >
+            <mat-icon>{{ button.icon }}</mat-icon>
+          </button>
+        }
+      </div>
+    }
   </mat-toolbar>
 }
 

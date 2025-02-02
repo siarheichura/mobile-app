@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { RouteNames } from '../../../routes.enum';
+import { ToolbarActionButton } from './toolbar-action-button.model';
 
 @Component({
   selector: 'nap-page-wrapper',
@@ -16,4 +17,7 @@ export class PageWrapperComponent {
   public withToolbar = input<boolean>(false);
   public title = input<string>();
   public backButtonRoute = input<RouteNames>();
+  public actionButtons = input<ToolbarActionButton[]>();
+
+  public actionButtonClicked = output<string>();
 }

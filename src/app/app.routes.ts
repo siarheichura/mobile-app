@@ -14,11 +14,17 @@ export const routes: Routes = [
   },
   {
     path: RouteNames.TeamsSettings,
-    loadComponent: () => import('./features/teams-settings/teams-settings.component').then((c) => c.TeamsSettingsComponent),
+    loadComponent: () =>
+      import('./features/teams-settings/teams-settings.component').then(
+        (c) => c.TeamsSettingsComponent,
+      ),
   },
   {
     path: RouteNames.GameSettings,
-    loadComponent: () => import('./features/game-settings/game-settings.component').then((c) => c.GameSettingsComponent),
+    loadComponent: () =>
+      import('./features/game-settings/game-settings.component').then(
+        (c) => c.GameSettingsComponent,
+      ),
   },
   {
     path: RouteNames.Game,

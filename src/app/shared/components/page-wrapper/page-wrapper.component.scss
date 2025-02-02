@@ -23,6 +23,16 @@
     justify-content: center;
   }
 
+  &__action-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &__title {
     width: 100%;
     display: flex;

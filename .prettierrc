@@ -3,7 +3,7 @@
   "semi": true,
   "trailingComma": "all",
   "arrowParens": "always",
-  "printWidth": 140,
+  "printWidth": 100,
   "tabWidth": 2,
   "bracketSpacing": true,
   "overrides": [
@@ -30,5 +30,6 @@
     "^@",
     "^\\[@"
   ],
-  "attributeSort": "ASC"
+  "attributeSort": "ASC",
+  "singleAttributePerLine": true
 }

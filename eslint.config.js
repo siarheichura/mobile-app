@@ -6,7 +6,12 @@ const importPlugin = require('eslint-plugin-import');
 module.exports = tseslint.config(
   {
     files: ['**/*.ts'],
-    extends: [eslint.configs.recommended, ...tseslint.configs.recommended, ...tseslint.configs.stylistic, ...angular.configs.tsRecommended],
+    extends: [
+      eslint.configs.recommended,
+      ...tseslint.configs.recommended,
+      ...tseslint.configs.stylistic,
+      ...angular.configs.tsRecommended,
+    ],
     plugins: {
       import: importPlugin,
     },

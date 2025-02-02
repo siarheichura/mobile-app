@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { RouterOutlet } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TeamsStore } from '@features/teams-settings/data-access/store/teams.store';
 
 @Component({
   selector: 'nap-root',
@@ -9,6 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet],
+  providers: [TeamsStore],
 })
 export class AppComponent implements OnInit {
   private _iconRegistry = inject(MatIconRegistry);
@@ -19,6 +21,9 @@ export class AppComponent implements OnInit {
   }
 
   private _registerSvgIcons(): void {
-    this._iconRegistry.addSvgIcon('logo', this._sanitizer.bypassSecurityTrustResourceUrl('assets/images/logo.svg'));
+    this._iconRegistry.addSvgIcon(
+      'logo',
+      this._sanitizer.bypassSecurityTrustResourceUrl('assets/images/logo.svg'),
+    );
   }
 }
