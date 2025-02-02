@@ -1,1 +1,26 @@
-<nap-page-wrapper [backButtonRoute]="routeNames.Empty" [title]="'Команды'" [withToolbar]="true"> choose team </nap-page-wrapper>
+<nap-page-wrapper
+  [actionButtons]="toolbarActionButtonsConfig"
+  [backButtonRoute]="routeNames.Empty"
+  [title]="'Команды'"
+  [withToolbar]="true"
+  (actionButtonClicked)="handleActionButtonClick($event)"
+>
+  <mat-list>
+    @for (team of store.teams(); track team.id) {
+      <mat-list-item class="teams__item">
+        <div class="teams__item-content">
+          <span>{{ team.name }}</span>
+
+          @if (store.teams().length > 2) {
+            <button
+              mat-icon-button
+              (click)="handleRemoveTeam(team.id)"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </div>
+      </mat-list-item>
+    }
+  </mat-list>
+</nap-page-wrapper>

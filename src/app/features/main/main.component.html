@@ -1,12 +1,34 @@
 <div class="header">
-  <mat-icon class="header__logo" svgIcon="logo" />
+  <mat-icon
+    class="header__logo"
+    svgIcon="logo"
+  />
 </div>
 
 <div class="body">
   <div class="buttons">
-    <button mat-flat-button class="buttons__button" disabled [routerLink]="routeNames.Game">Продолжить</button>
-    <button mat-flat-button class="buttons__button" [routerLink]="routeNames.TeamsSettings">Новая игра</button>
-    <button mat-flat-button class="buttons__button" [routerLink]="routeNames.Rules">Правила</button>
+    <button
+      mat-flat-button
+      class="buttons__button"
+      disabled
+      [routerLink]="routeNames.Game"
+    >
+      Продолжить
+    </button>
+    <button
+      mat-flat-button
+      class="buttons__button"
+      [routerLink]="routeNames.TeamsSettings"
+    >
+      Новая игра
+    </button>
+    <button
+      mat-flat-button
+      class="buttons__button"
+      [routerLink]="routeNames.Rules"
+    >
+      Правила
+    </button>
   </div>
 </div>
 

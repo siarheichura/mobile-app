@@ -1,6 +1,13 @@
-<nap-page-wrapper [backButtonRoute]="routeNames.Empty" [title]="'Правила'" [withToolbar]="true">
+<nap-page-wrapper
+  [backButtonRoute]="routeNames.Empty"
+  [title]="'Правила'"
+  [withToolbar]="true"
+>
   <div class="header">
-    <mat-icon class="header__logo" svgIcon="logo" />
+    <mat-icon
+      class="header__logo"
+      svgIcon="logo"
+    />
 
     <div class="header__title">
       <span class="header__name">“НАПОЙ”</span>
@@ -11,7 +18,10 @@
   <div class="body">
     @for (rule of rules; track rule.id) {
       <div class="rule">
-        <mat-icon class="rule__icon" [fontIcon]="rule.icon" />
+        <mat-icon
+          class="rule__icon"
+          [fontIcon]="rule.icon"
+        />
         <span class="rule__description">{{ rule.text }}</span>
       </div>
     }

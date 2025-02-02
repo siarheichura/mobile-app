@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
+import { PageWrapperComponent } from '@shared/components/page-wrapper/page-wrapper.component';
 import { RouteNames } from '../../routes.enum';
 import { Rule } from './rule.model';
-import { PageWrapperComponent } from '../../shared/components/page-wrapper/page-wrapper.component';
 
 @Component({
   selector: 'nap-rules',
