@@ -3,7 +3,7 @@ import { from, map, Observable } from 'rxjs';
 import { Preferences } from '@capacitor/preferences';
 import { UuidService } from '@shared/services/uuid.service';
 import { ITeamsApi } from './teams-api.interface';
-import { Team } from '../store/models/team.model';
+import { TeamModel } from '../store/models/team.model';
 import { teamNames } from '../store/utils/team-names';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class TeamsApi implements ITeamsApi {
 
   private readonly _storageKey = 'TEAMS';
 
-  public get(): Observable<Team[]> {
+  public get(): Observable<TeamModel[]> {
     return from(Preferences.get({ key: this._storageKey })).pipe(
       map((data) => {
         if (data.value) {
@@ -29,7 +29,7 @@ export class TeamsApi implements ITeamsApi {
     );
   }
 
-  public set(teams: Team[]): Observable<void> {
+  public set(teams: TeamModel[]): Observable<void> {
     return from(Preferences.set({ key: this._storageKey, value: JSON.stringify(teams) }));
   }
 
@@ -43,7 +43,7 @@ export class TeamsApi implements ITeamsApi {
     return teamNames[randomIndex];
   }
 
-  private _generateDefaultTeams(): Team[] {
+  private _generateDefaultTeams(): TeamModel[] {
     return [
       { name: this.getRandomTeamName(), id: this._uuidService.uuid() },
       { name: this.getRandomTeamName(), id: this._uuidService.uuid() },

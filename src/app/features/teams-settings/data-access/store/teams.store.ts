@@ -5,22 +5,22 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { UuidService } from '@shared/services/uuid.service';
 import { pipe, switchMap, tap } from 'rxjs';
 import { TeamsApi } from '../api/teams-api';
-import { Team } from './models/team.model';
+import { TeamModel } from './models/team.model';
 
-interface AppState {
-  teams: Team[];
+interface TeamsState {
+  teams: TeamModel[];
   isLoading: boolean | null;
   error: unknown | null;
 }
 
-const initialState: AppState = {
+const initialState: TeamsState = {
   teams: [],
   isLoading: null,
   error: null,
 };
 
 export const TeamsStore = signalStore(
-  withState<AppState>(initialState),
+  withState<TeamsState>(initialState),
 
   withMethods((store, api = inject(TeamsApi), uuidService = inject(UuidService)) => ({
     getTeams: rxMethod<void>(
@@ -30,7 +30,7 @@ export const TeamsStore = signalStore(
           api.get().pipe(
             tapResponse({
               next: (teams) => patchState(store, { teams, error: null }),
-              error: (error) => patchState(store, { teams: [], error: error }),
+              error: (error) => patchState(store, { teams: [], error }),
               finalize: () => patchState(store, { isLoading: false }),
             }),
           ),
@@ -50,7 +50,7 @@ export const TeamsStore = signalStore(
           api.set(store.teams()).pipe(
             tapResponse({
               next: () => patchState(store, { error: null }),
-              error: (error) => patchState(store, { error: error }),
+              error: (error) => patchState(store, { error }),
               finalize: () => patchState(store, { isLoading: false }),
             }),
           ),
@@ -70,7 +70,7 @@ export const TeamsStore = signalStore(
           api.set(store.teams()).pipe(
             tapResponse({
               next: () => patchState(store, { error: null }),
-              error: (error) => patchState(store, { error: error }),
+              error: (error) => patchState(store, { error }),
               finalize: () => patchState(store, { isLoading: false }),
             }),
           ),
@@ -85,7 +85,7 @@ export const TeamsStore = signalStore(
           api.clear().pipe(
             tapResponse({
               next: () => patchState(store, { teams: [], error: null }),
-              error: (error) => patchState(store, { error: error }),
+              error: (error) => patchState(store, { error }),
               finalize: () => patchState(store, { isLoading: false }),
             }),
           ),

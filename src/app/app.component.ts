@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TeamsStore } from '@features/teams-settings/data-access/store/teams.store';
+import { GameSettingsStore } from '@features/game-settings/data-access/store/game-settings.store';
 
 @Component({
   selector: 'nap-root',
@@ -10,7 +11,7 @@ import { TeamsStore } from '@features/teams-settings/data-access/store/teams.sto
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet],
-  providers: [TeamsStore],
+  providers: [TeamsStore, GameSettingsStore],
 })
 export class AppComponent implements OnInit {
   private _iconRegistry = inject(MatIconRegistry);

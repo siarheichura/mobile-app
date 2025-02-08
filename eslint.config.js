@@ -66,27 +66,6 @@ module.exports = tseslint.config(
           format: ['PascalCase'],
         },
       ],
-      '@typescript-eslint/member-ordering': [
-        'error',
-        {
-          default: [
-            'signature',
-            'public-static-field',
-            'protected-static-field',
-            'private-static-field',
-            'public-decorated-field',
-            'protected-decorated-field',
-            'private-decorated-field',
-            'private-instance-field',
-            'public-instance-field',
-            'protected-instance-field',
-            'constructor',
-            'public-instance-method',
-            'protected-instance-method',
-            'private-instance-method',
-          ],
-        },
-      ],
       '@typescript-eslint/no-inferrable-types': 'off',
 
       // **** Import rules **** //

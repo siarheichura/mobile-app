@@ -1,0 +1,27 @@
+@use "@angular/material" as mat;
+
+:host {
+  @include mat.slider-overrides(
+    (
+      label-container-color: #353839,
+      label-label-text-color: #ffff00,
+      handle-color: #353839,
+      focus-handle-color: #353839,
+      hover-handle-color: #353839,
+      active-track-color: #353839,
+      inactive-track-color: #353839,
+      hover-state-layer-color: none,
+      focus-state-layer-color: none,
+    )
+  );
+}
+
+.game {
+  &__slider {
+    width: 100%;
+  }
+
+  &__slider-title {
+    font-size: 13px;
+  }
+}
