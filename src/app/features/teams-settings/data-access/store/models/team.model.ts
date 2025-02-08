@@ -1,4 +1,4 @@
-export interface Team {
+export interface TeamModel {
   id: string;
   name: string;
 }
