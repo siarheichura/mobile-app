@@ -1,0 +1,11 @@
+<nap-page-wrapper
+  [actionButtons]="toolbarActionButtonsConfig"
+  [backButtonRoute]="routeNames.TeamsSettings"
+  [title]="'Рейтинг команд'"
+  [withToolbar]="true"
+  (actionButtonClicked)="handleActionButtonClick($event)"
+>
+  <div class="rating__teams"></div>
+
+  <div class="rating__get-ready"></div>
+</nap-page-wrapper>

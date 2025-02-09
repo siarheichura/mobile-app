@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { PageWrapperComponent } from '@shared/components/page-wrapper/page-wrapper.component';
-import { RouteNames } from '../../routes.enum';
-import { Rule } from './rule.model';
+import { AppStore } from '../../data-access/store/app.store';
+import { RouteNames } from '../../app.routes';
 
 @Component({
   selector: 'nap-rules',
@@ -12,28 +12,7 @@ import { Rule } from './rule.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RulesComponent {
-  public readonly routeNames = RouteNames;
+  public store = inject(AppStore);
 
-  public readonly rules: Rule[] = [
-    {
-      id: 1,
-      icon: 'task_alt',
-      text: 'Задача игрока - за отведенное время указанным звуком напеть мелодию из указанной песни товарищам по команде.',
-    },
-    {
-      id: 2,
-      icon: 'stars',
-      text: 'Отгаданная песня приносит команде одно очко. Пропущенная песня не приносит ничего.',
-    },
-    {
-      id: 3,
-      icon: 'cancel',
-      text: 'Во время выполнения задания нельзя издавать никаких звуков кроме указанного.',
-    },
-    {
-      id: 4,
-      icon: 'emoji_events',
-      text: 'Победителем становится команда, у которой первой количество очков достигло указанного перед началом игры значения',
-    },
-  ];
+  public readonly routeNames = RouteNames;
 }

@@ -5,9 +5,13 @@ import { MatIconButton } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { PageWrapperComponent } from '@shared/components/page-wrapper/page-wrapper.component';
 import { ToolbarActionButton } from '@shared/components/page-wrapper/toolbar-action-button.model';
-import { RouteNames } from '../../routes.enum';
-import { TeamsStore } from './data-access/store/teams.store';
-import { ToolbarActions } from './data-access/enums/toolbar-actions';
+import { AppStore } from '../../data-access/store/app.store';
+import { RouteNames } from '../../app.routes';
+
+enum ToolbarActions {
+  Proceed = 'proceed',
+  AddTeam = 'add',
+}
 
 @Component({
   selector: 'nap-teams-settings',
@@ -18,7 +22,7 @@ import { ToolbarActions } from './data-access/enums/toolbar-actions';
 })
 export class TeamsSettingsComponent {
   private _router = inject(Router);
-  public store = inject(TeamsStore);
+  public store = inject(AppStore);
 
   public readonly routeNames = RouteNames;
   public readonly toolbarActionButtonsConfig: ToolbarActionButton[] = [
