@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { RouterOutlet } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { TeamsStore } from '@features/teams-settings/data-access/store/teams.store';
-import { GameSettingsStore } from '@features/game-settings/data-access/store/game-settings.store';
+import { AppStore } from './data-access/store/app.store';
 
 @Component({
   selector: 'nap-root',
@@ -11,7 +10,7 @@ import { GameSettingsStore } from '@features/game-settings/data-access/store/gam
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet],
-  providers: [TeamsStore, GameSettingsStore],
+  providers: [AppStore],
 })
 export class AppComponent implements OnInit {
   private _iconRegistry = inject(MatIconRegistry);

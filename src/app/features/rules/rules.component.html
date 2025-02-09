@@ -16,7 +16,7 @@
   </div>
 
   <div class="body">
-    @for (rule of rules; track rule.id) {
+    @for (rule of store.rules(); track rule.id) {
       <div class="rule">
         <mat-icon
           class="rule__icon"

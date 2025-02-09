@@ -3,7 +3,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
-import { RouteNames } from '../../../routes.enum';
+import { RouteNames } from '../../../app.routes';
 import { ToolbarActionButton } from './toolbar-action-button.model';
 
 @Component({

@@ -10,7 +10,8 @@
     "add:ios": "npx cap add ios",
     "sync": "npx cap sync",
     "open:ios": "npx cap open ios",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "format": "prettier --write ."
   },
   "private": true,
   "dependencies": {
