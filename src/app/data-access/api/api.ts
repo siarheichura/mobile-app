@@ -7,6 +7,7 @@ import { StorageKeys } from '../enums/storage-keys';
 import { teamNames } from '../utils/team-names';
 import { TeamModel } from '../store/models/team.model';
 import { GameSettingsModel } from '../store/models/game-settings.model';
+import { GameModel } from '../store/models/game.model';
 
 @Injectable({
   providedIn: 'root',
@@ -67,5 +68,19 @@ export class Api implements IApi {
       { name: this.getRandomTeamName(), id: this._uuidService.uuid(), score: 0 },
       { name: this.getRandomTeamName(), id: this._uuidService.uuid(), score: 0 },
     ];
+  }
+
+  public getGameInfo(): Observable<GameModel | null> {
+    return from(Preferences.get({ key: StorageKeys.Game })).pipe(
+      map((data) => (data.value ? JSON.parse(data.value) : null)),
+    );
+  }
+
+  public setGameInfo(game: GameModel): Observable<void> {
+    return from(Preferences.set({ key: StorageKeys.Game, value: JSON.stringify(game) }));
+  }
+
+  public clearGameInfo(): Observable<void> {
+    return from(Preferences.remove({ key: StorageKeys.Game }));
   }
 }

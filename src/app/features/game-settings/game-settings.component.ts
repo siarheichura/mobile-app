@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, Signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSlider, MatSliderThumb } from '@angular/material/slider';
@@ -7,6 +7,7 @@ import { ToolbarActionButton } from '@shared/components/page-wrapper/toolbar-act
 import { AppStore } from '../../data-access/store/app.store';
 import { GameSettingsModel } from '../../data-access/store/models/game-settings.model';
 import { RouteNames } from '../../app.routes';
+import { TeamModel } from '../../data-access/store/models/team.model';
 
 enum GameSettingsToolbarActions {
   Proceed = 'proceed',
@@ -27,7 +28,7 @@ interface Form {
 export class GameSettingsComponent {
   private _router = inject(Router);
   private _fb = inject(FormBuilder);
-  public store = inject(AppStore);
+  private _store = inject(AppStore);
 
   public readonly routeNames = RouteNames;
   public readonly toolbarActionButtonsConfig: ToolbarActionButton[] = [
@@ -39,15 +40,12 @@ export class GameSettingsComponent {
     time: [60],
   });
 
-  constructor() {
-    effect(() => {
-      this.form.patchValue({ ...this.store.settings() });
-    });
-  }
+  private _firstTeam: Signal<TeamModel> = computed(() => this._store.teams()[0]);
 
   public handleActionButtonClick(action: string): void {
     if (action === GameSettingsToolbarActions.Proceed) {
-      this.store.setSettings(this.form.value as GameSettingsModel);
+      this._store.setGameInfo({ round: 1, currentTeam: this._firstTeam() });
+      this._store.setSettings(this.form.value as GameSettingsModel);
       void this._router.navigate([RouteNames.TeamsRating]);
     }
   }

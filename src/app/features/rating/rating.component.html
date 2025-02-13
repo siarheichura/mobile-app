@@ -5,7 +5,27 @@
   [withToolbar]="true"
   (actionButtonClicked)="handleActionButtonClick($event)"
 >
-  <div class="rating__teams"></div>
+  <div class="rating__goal">
+    <mat-icon>emoji_events</mat-icon>
+    {{ store.settings()?.songsAmount }}
+  </div>
 
-  <div class="rating__get-ready"></div>
+  <div class="rating__teams">
+    <mat-list>
+      @for (team of store.teams(); track team.id) {
+        <mat-list-item class="teams__item">
+          <div class="teams__item-content">
+            <span>{{ team.name }}</span>
+            <span>{{ team.score }}</span>
+          </div>
+        </mat-list-item>
+      }
+    </mat-list>
+  </div>
+
+  <div class="rating__get-ready">
+    <span>Раунд {{ store.game()?.round }}</span>
+    <span>приготовиться команде</span>
+    <span>{{ store.game()?.currentTeam?.name }}</span>
+  </div>
 </nap-page-wrapper>

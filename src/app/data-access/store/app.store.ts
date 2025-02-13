@@ -10,11 +10,13 @@ import { GameSettingsModel } from './models/game-settings.model';
 import { RuleModel } from './models/rule.model';
 import { rules } from '../utils/rules';
 import { defaultSettings } from '../utils/default-settings';
+import { GameModel } from './models/game.model';
 
 export interface AppState {
   teams: TeamModel[];
   settings: GameSettingsModel | null;
   rules: RuleModel[];
+  game: GameModel | null;
   isLoading: boolean | null;
   error: unknown | null;
 }
@@ -23,6 +25,7 @@ const initialState: AppState = {
   teams: [],
   settings: null,
   rules: [],
+  game: null,
   isLoading: null,
   error: null,
 };
@@ -152,6 +155,57 @@ export const AppStore = signalStore(
     getRules() {
       patchState(store, { rules });
     },
+
+    startGame() {
+      patchState(store, {
+        game: { round: 1, currentTeam: store.teams()[0] },
+      });
+    },
+
+    getGameInfo: rxMethod<void>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true })),
+        switchMap(() =>
+          api.getGameInfo().pipe(
+            tapResponse({
+              next: (game) => patchState(store, { game, error: null }),
+              error: (error) => patchState(store, { game: null, error }),
+              finalize: () => patchState(store, { isLoading: false }),
+            }),
+          ),
+        ),
+      ),
+    ),
+
+    setGameInfo: rxMethod<GameModel>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true })),
+        switchMap((game) =>
+          api.setGameInfo(game).pipe(
+            tapResponse({
+              next: () => patchState(store, { game, error: null }),
+              error: (error) => patchState(store, { game: null, error }),
+              finalize: () => patchState(store, { isLoading: false }),
+            }),
+          ),
+        ),
+      ),
+    ),
+
+    clearGameInfo: rxMethod<void>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true })),
+        switchMap(() =>
+          api.clearGameInfo().pipe(
+            tapResponse({
+              next: () => patchState(store, { game: null, error: null }),
+              error: (error) => patchState(store, { game: null, error }),
+              finalize: () => patchState(store, { isLoading: false }),
+            }),
+          ),
+        ),
+      ),
+    ),
   })),
 
   withHooks({
@@ -159,6 +213,7 @@ export const AppStore = signalStore(
       store.getSettings();
       store.getTeams();
       store.getRules();
+      store.getGameInfo();
     },
   }),
 );
