@@ -5,14 +5,14 @@ import { GameModel } from '../store/models/game.model';
 
 export interface IApi {
   getSettings(): Observable<GameSettingsModel | null>;
-  setSettings(settings: GameSettingsModel): Observable<void>;
+  setSettings(settings: GameSettingsModel): Observable<GameSettingsModel>;
   clearSettings(): Observable<void>;
 
   getTeams(): Observable<TeamModel[] | null>;
-  setTeams(teams: TeamModel[]): Observable<void>;
+  setTeams(teams: TeamModel[]): Observable<TeamModel[]>;
   clearTeams(): Observable<void>;
 
   getGameInfo(): Observable<GameModel | null>;
-  setGameInfo(game: GameModel): Observable<void>;
+  setGameInfo(game: GameModel): Observable<GameModel>;
   clearGameInfo(): Observable<void>;
 }

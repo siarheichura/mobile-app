@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatList, MatListItem } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
@@ -22,11 +22,15 @@ export class RatingComponent {
   private _router = inject(Router);
   public store = inject(AppStore);
 
-  protected readonly routeNames = RouteNames;
+  public currentTeam = computed(() => {
+    return this.store.teams().find((team) => team.id === this.store.game()?.currentTeamId);
+  });
 
   public readonly toolbarActionButtonsConfig: ToolbarActionButton[] = [
     { icon: 'arrow_forward_ios', action: ToolbarActions.Proceed },
   ];
+
+  protected readonly routeNames = RouteNames;
 
   public handleActionButtonClick(action: string): void {
     if (action === ToolbarActions.Proceed) {

@@ -21,18 +21,18 @@ export class Api implements IApi {
     );
   }
 
-  public setSettings(settings: GameSettingsModel): Observable<void> {
+  public setSettings(settings: GameSettingsModel): Observable<GameSettingsModel> {
     return from(
-      Preferences.set({ key: StorageKeys.GameSettings, value: JSON.stringify(settings) }),
-    );
+      Preferences.set({
+        key: StorageKeys.GameSettings,
+        value: JSON.stringify(settings),
+      }),
+    ).pipe(map(() => settings));
   }
 
   public clearSettings(): Observable<void> {
     return from(Preferences.remove({ key: StorageKeys.GameSettings }));
   }
-
-  // directly in store
-  // public getRules(): Observable<RuleModel[]> {}
 
   public getTeams(): Observable<TeamModel[]> {
     return from(Preferences.get({ key: StorageKeys.Teams })).pipe(
@@ -49,8 +49,10 @@ export class Api implements IApi {
     );
   }
 
-  public setTeams(teams: TeamModel[]): Observable<void> {
-    return from(Preferences.set({ key: StorageKeys.Teams, value: JSON.stringify(teams) }));
+  public setTeams(teams: TeamModel[]): Observable<TeamModel[]> {
+    return from(Preferences.set({ key: StorageKeys.Teams, value: JSON.stringify(teams) })).pipe(
+      map(() => teams),
+    );
   }
 
   public clearTeams(): Observable<void> {
@@ -76,8 +78,13 @@ export class Api implements IApi {
     );
   }
 
-  public setGameInfo(game: GameModel): Observable<void> {
-    return from(Preferences.set({ key: StorageKeys.Game, value: JSON.stringify(game) }));
+  public setGameInfo(game: GameModel): Observable<GameModel> {
+    return from(
+      Preferences.set({
+        key: StorageKeys.Game,
+        value: JSON.stringify(game),
+      }),
+    ).pipe(map(() => game));
   }
 
   public clearGameInfo(): Observable<void> {

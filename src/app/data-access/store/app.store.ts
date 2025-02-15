@@ -1,7 +1,14 @@
-import { inject } from '@angular/core';
-import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
+import { computed, inject } from '@angular/core';
+import {
+  patchState,
+  signalStore,
+  withComputed,
+  withHooks,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { pipe, switchMap, tap } from 'rxjs';
+import { pipe, switchMap, tap, throwError } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
 import { UuidService } from '@shared/services/uuid.service';
 import { Api } from '../api/api';
@@ -33,6 +40,10 @@ const initialState: AppState = {
 export const AppStore = signalStore(
   withState<AppState>(initialState),
 
+  withComputed((store) => ({
+    firstTeam: computed(() => store.teams()[0]),
+  })),
+
   withMethods((store, api = inject(Api), uuidService = inject(UuidService)) => ({
     getSettings: rxMethod<void>(
       pipe(
@@ -55,7 +66,7 @@ export const AppStore = signalStore(
         switchMap((settings) =>
           api.setSettings(settings).pipe(
             tapResponse({
-              next: () => patchState(store, { settings, error: null }),
+              next: (settings) => patchState(store, { settings, error: null }),
               error: (error) => patchState(store, { error }),
               finalize: () => patchState(store, { isLoading: false }),
             }),
@@ -96,19 +107,18 @@ export const AppStore = signalStore(
 
     addTeam: rxMethod<void>(
       pipe(
-        tap(() =>
-          patchState(store, {
-            isLoading: true,
-            teams: [
-              ...store.teams(),
-              { name: api.getRandomTeamName(), id: uuidService.uuid(), score: 0 },
-            ],
-          }),
-        ),
+        tap(() => patchState(store, { isLoading: true })),
         switchMap(() =>
           api.setTeams(store.teams()).pipe(
             tapResponse({
-              next: () => patchState(store, { error: null }),
+              next: (teams) =>
+                patchState(store, {
+                  teams: [
+                    ...teams,
+                    { name: api.getRandomTeamName(), id: uuidService.uuid(), score: 0 },
+                  ],
+                  error: null,
+                }),
               error: (error) => patchState(store, { error }),
               finalize: () => patchState(store, { isLoading: false }),
             }),
@@ -156,12 +166,6 @@ export const AppStore = signalStore(
       patchState(store, { rules });
     },
 
-    startGame() {
-      patchState(store, {
-        game: { round: 1, currentTeam: store.teams()[0] },
-      });
-    },
-
     getGameInfo: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
@@ -204,6 +208,49 @@ export const AppStore = signalStore(
             }),
           ),
         ),
+      ),
+    ),
+
+    startGame: rxMethod<void>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true })),
+        switchMap(() =>
+          api
+            .setGameInfo({
+              round: 1,
+              currentTeamId: store.firstTeam()?.id,
+              guessed: 0,
+              skipped: 0,
+              isPaused: false,
+              isStarted: false,
+            })
+            .pipe(
+              tapResponse({
+                next: (game) => patchState(store, { game, error: null }),
+                error: (error) => patchState(store, { game: null, error }),
+                finalize: () => patchState(store, { isLoading: false }),
+              }),
+            ),
+        ),
+      ),
+    ),
+
+    pauseGame: rxMethod<void>(
+      pipe(
+        switchMap(() => {
+          const game = store.game();
+
+          if (!game) {
+            return throwError(() => new Error('Game is not started'));
+          }
+
+          return api.setGameInfo({ ...game, isPaused: true }).pipe(
+            tapResponse({
+              next: (game) => patchState(store, { game, error: null }),
+              error: (error) => patchState(store, { game: null, error }),
+            }),
+          );
+        }),
       ),
     ),
   })),

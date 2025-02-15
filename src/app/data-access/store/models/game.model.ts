@@ -1,6 +1,8 @@
-import { TeamModel } from './team.model';
-
 export interface GameModel {
   round: number;
-  currentTeam: TeamModel;
+  currentTeamId: string;
+  guessed: number;
+  skipped: number;
+  isStarted: boolean;
+  isPaused: boolean;
 }
