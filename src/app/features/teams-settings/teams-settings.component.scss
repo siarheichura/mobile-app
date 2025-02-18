@@ -1,15 +1,16 @@
-.teams {
-  &__item {
-    &:active {
-      background-color: #ccced0;
-    }
-  }
+@use "variables" as *;
 
+.teams {
   &__item-content {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: $secondary-text;
+  }
+
+  &__item-close-button {
+    color: $secondary-text;
   }
 
   &__add-button {

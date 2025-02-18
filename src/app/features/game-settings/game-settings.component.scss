@@ -1,15 +1,16 @@
 @use "@angular/material" as mat;
+@use "variables" as *;
 
 :host {
   @include mat.slider-overrides(
     (
-      label-container-color: #353839,
-      label-label-text-color: #ffff00,
-      handle-color: #353839,
-      focus-handle-color: #353839,
-      hover-handle-color: #353839,
-      active-track-color: #353839,
-      inactive-track-color: #353839,
+      label-container-color: $secondary-background,
+      label-label-text-color: $primary-text,
+      handle-color: $secondary-background,
+      focus-handle-color: $secondary-background,
+      hover-handle-color: $secondary-background,
+      active-track-color: $secondary-background,
+      inactive-track-color: $secondary-background,
       hover-state-layer-color: none,
       focus-state-layer-color: none,
     )

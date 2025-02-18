@@ -7,14 +7,16 @@
 
 <div class="body">
   <div class="buttons">
-    <button
-      mat-flat-button
-      class="buttons__button"
-      disabled
-      [routerLink]="routeNames.Game"
-    >
-      Продолжить
-    </button>
+    @if (isGameExists()) {
+      <button
+        mat-flat-button
+        class="buttons__button"
+        [routerLink]="routeNames.Game"
+      >
+        Продолжить
+      </button>
+    }
+
     <button
       mat-flat-button
       class="buttons__button"
@@ -22,6 +24,7 @@
     >
       Новая игра
     </button>
+
     <button
       mat-flat-button
       class="buttons__button"
@@ -33,8 +36,5 @@
 </div>
 
 <div class="footer">
-  <div class="by">
-    <span class="by__info">designed and developed by</span>
-    <span class="by__name">seryiyvolk</span>
-  </div>
+  <span>designed and developed by seryiyvolk</span>
 </div>

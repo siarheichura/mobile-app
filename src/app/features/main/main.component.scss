@@ -1,7 +1,9 @@
 @use "@angular/material" as mat;
+@use "variables" as *;
 
 :host {
   height: 100%;
+  padding: 0 24px;
   display: grid;
   grid-template-rows: 57% 37% 6%;
 }
@@ -24,6 +26,7 @@
 }
 
 .buttons {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,16 +34,16 @@
   gap: 15px;
 
   &__button {
-    width: 350px;
+    width: 100%;
     height: 65px;
-    border-radius: 30px;
-    font-size: 30px;
-    font-weight: 600;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 500;
 
     @include mat.button-overrides(
       (
-        filled-container-color: #353839,
-        filled-label-text-color: #ffff00,
+        filled-container-color: $secondary-background,
+        filled-label-text-color: $primary-text,
       )
     );
   }
@@ -48,23 +51,9 @@
 
 .footer {
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.by {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  &__info {
-    font-size: 10px;
-    font-weight: 200;
-  }
-
-  &__name {
-    font-size: 13px;
-    font-weight: 200;
-  }
+  color: $tertiary-text;
+  font-size: 11px;
+  font-weight: 200;
 }

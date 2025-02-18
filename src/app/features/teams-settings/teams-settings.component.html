@@ -14,6 +14,7 @@
           @if (store.teams().length > 2) {
             <button
               mat-icon-button
+              class="teams__item-close-button"
               (click)="handleRemoveTeam(team.id)"
             >
               <mat-icon>close</mat-icon>

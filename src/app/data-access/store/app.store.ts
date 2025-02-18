@@ -42,6 +42,10 @@ export const AppStore = signalStore(
 
   withComputed((store) => ({
     firstTeam: computed(() => store.teams()[0]),
+
+    currentTeam: computed(() =>
+      store.teams().find((team) => team.id === store.game()?.currentTeamId),
+    ),
   })),
 
   withMethods((store, api = inject(Api), uuidService = inject(UuidService)) => ({

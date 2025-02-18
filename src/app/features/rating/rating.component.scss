@@ -1,0 +1,11 @@
+@use "variables" as *;
+
+:host {
+  color: $secondary-text;
+}
+
+.rating {
+  &__team {
+    color: $secondary-text;
+  }
+}

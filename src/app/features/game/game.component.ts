@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { PageWrapperComponent } from '@shared/components/page-wrapper/page-wrapper.component';
+import { AppStore } from '../../data-access/store/app.store';
+import { RouteNames } from '../../app.routes';
 
 @Component({
   selector: 'nap-game',
@@ -8,4 +10,10 @@ import { PageWrapperComponent } from '@shared/components/page-wrapper/page-wrapp
   styleUrl: './game.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GameComponent {}
+export class GameComponent {
+  private _store = inject(AppStore);
+
+  public currentTeam = computed(() => this._store.currentTeam());
+  public game = computed(() => this._store.game());
+  protected readonly RouteNames = RouteNames;
+}

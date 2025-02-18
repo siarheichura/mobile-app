@@ -1,3 +1,15 @@
-<nap-page-wrapper [withToolbar]="true">
-  <p>game works!</p>
+<nap-page-wrapper
+  [backButtonRoute]="RouteNames.Empty"
+  [withToolbar]="true"
+>
+  <div>{{ currentTeam()?.name }}</div>
+
+  <div>Угадано: {{ game()?.guessed }}</div>
+
+  <div>Навзвание песни</div>
+  <div>Навзвание звука</div>
+
+  <div>Время 00:00</div>
+
+  <div>Пропущено: {{ game()?.skipped }}</div>
 </nap-page-wrapper>

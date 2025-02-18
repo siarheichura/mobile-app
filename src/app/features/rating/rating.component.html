@@ -13,8 +13,8 @@
   <div class="rating__teams">
     <mat-list>
       @for (team of store.teams(); track team.id) {
-        <mat-list-item class="teams__item">
-          <div class="teams__item-content">
+        <mat-list-item class="rating__team">
+          <div class="rating__team">
             <span>{{ team.name }}</span>
             <span>{{ team.score }}</span>
           </div>

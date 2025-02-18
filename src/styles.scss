@@ -1,4 +1,5 @@
 @use "@angular/material" as mat;
+@use "variables" as *;
 
 html {
   @include mat.theme(
@@ -21,6 +22,6 @@ html {
 
 body {
   height: 100vh;
-  background-color: #efefef;
+  background-color: $primary-background;
   margin: 0;
 }
