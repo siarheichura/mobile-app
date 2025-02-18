@@ -19,53 +19,11 @@ module.exports = tseslint.config(
     rules: {
       // **** Angular component rules **** //
 
-      '@angular-eslint/directive-selector': [
-        'error',
-        {
-          type: 'attribute',
-          prefix: 'nap',
-          style: 'camelCase',
-        },
-      ],
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'nap',
-          style: 'kebab-case',
-        },
-      ],
       '@angular-eslint/use-component-view-encapsulation': 'error',
       '@angular-eslint/prefer-on-push-component-change-detection': ['error'],
 
       // **** Typescript rules **** //
 
-      '@typescript-eslint/explicit-member-accessibility': [
-        'error',
-        {
-          overrides: {
-            constructors: 'no-public',
-          },
-        },
-      ],
-      '@typescript-eslint/naming-convention': [
-        'error',
-        {
-          selector: 'memberLike',
-          format: ['camelCase'],
-          leadingUnderscore: 'forbid',
-        },
-        {
-          selector: 'memberLike',
-          modifiers: ['private'],
-          format: ['camelCase'],
-          leadingUnderscore: 'require',
-        },
-        {
-          selector: 'enumMember',
-          format: ['PascalCase'],
-        },
-      ],
       '@typescript-eslint/no-inferrable-types': 'off',
 
       // **** Import rules **** //

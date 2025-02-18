@@ -15,5 +15,5 @@ export class GameComponent {
 
   public currentTeam = computed(() => this._store.currentTeam());
   public game = computed(() => this._store.game());
-  protected readonly RouteNames = RouteNames;
+  public readonly routeNames = RouteNames;
 }
