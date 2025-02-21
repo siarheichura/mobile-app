@@ -55,13 +55,8 @@ module.exports = tseslint.config(
       'newline-before-return': 'error',
       'no-multi-spaces': 'error',
       'object-curly-spacing': ['error', 'always'],
-      'no-console': [
-        'error',
-        {
-          allow: ['warn', 'error'],
-        },
-      ],
       'eol-last': ['error', 'always'],
+      'no-unused-vars': 'error',
     },
   },
   {
@@ -78,12 +73,7 @@ module.exports = tseslint.config(
       '@angular-eslint/template/no-negated-async': ['error'],
       '@angular-eslint/template/prefer-control-flow': 'error',
       '@angular-eslint/template/prefer-ngsrc': 'error',
-      '@angular-eslint/template/conditional-complexity': [
-        'error',
-        {
-          maxComplexity: 5,
-        },
-      ],
+      '@angular-eslint/template/conditional-complexity': ['error', { maxComplexity: 5 }],
       '@angular-eslint/template/attributes-order': ['error'],
       '@angular-eslint/template/prefer-self-closing-tags': 'error',
     },

@@ -12,12 +12,12 @@ import { pipe, switchMap, tap, throwError } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
 import { UuidService } from '@shared/services/uuid.service';
 import { Api } from '../api/api';
-import { TeamModel } from './models/team.model';
-import { GameSettingsModel } from './models/game-settings.model';
-import { RuleModel } from './models/rule.model';
+import { TeamModel } from '../models/team.model';
+import { GameSettingsModel } from '../models/game-settings.model';
+import { RuleModel } from '../models/rule.model';
 import { rules } from '../utils/rules';
 import { defaultSettings } from '../utils/default-settings';
-import { GameModel } from './models/game.model';
+import { GameModel } from '../models/game.model';
 
 export interface AppState {
   teams: TeamModel[];
@@ -236,6 +236,25 @@ export const AppStore = signalStore(
               }),
             ),
         ),
+      ),
+    ),
+
+    letsPlay: rxMethod<void>(
+      pipe(
+        switchMap(() => {
+          const game = store.game();
+
+          if (!game) {
+            return throwError(() => new Error('Game is not started'));
+          }
+
+          return api.setGameInfo({ ...game, isStarted: true }).pipe(
+            tapResponse({
+              next: (game) => patchState(store, { game, error: null }),
+              error: (error) => patchState(store, { game: null, error }),
+            }),
+          );
+        }),
       ),
     ),
 

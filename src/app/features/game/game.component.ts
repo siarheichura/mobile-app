@@ -1,19 +1,69 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { PageWrapperComponent } from '@shared/components/page-wrapper/page-wrapper.component';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  viewChildren,
+} from '@angular/core';
+import { GestureController, GestureDetail, AnimationController } from '@ionic/angular/standalone';
 import { AppStore } from '../../data-access/store/app.store';
 import { RouteNames } from '../../app.routes';
 
 @Component({
   selector: 'nap-game',
-  imports: [PageWrapperComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameComponent {
-  private _store = inject(AppStore);
+  #store = inject(AppStore);
+  #gestureCtrl = inject(GestureController);
+  #animationCtrl = inject(AnimationController);
 
-  public currentTeam = computed(() => this._store.currentTeam());
-  public game = computed(() => this._store.game());
-  public readonly routeNames = RouteNames;
+  cards = viewChildren<ElementRef>('card');
+
+  currentTeam = computed(() => this.#store.currentTeam());
+  game = computed(() => this.#store.game());
+
+  readonly routeNames = RouteNames;
+
+  constructor() {
+    effect(() => {
+      this.cards().forEach((card) => {
+        this.#createGesture(card);
+      });
+    });
+  }
+
+  letsPlay(): void {
+    this.#store.letsPlay();
+  }
+
+  #createGesture(element: ElementRef) {
+    const gesture = this.#gestureCtrl.create({
+      el: element.nativeElement,
+      direction: 'y',
+      threshold: 50,
+      onMove: (detail) => this.#handleMove(detail, element),
+      gestureName: 'swipe-up',
+    });
+
+    gesture.enable();
+  }
+
+  #handleMove(detail: GestureDetail, element: ElementRef): void {
+    void this.#animationCtrl
+      .create()
+      .addElement(element.nativeElement)
+      .duration(100)
+      .fromTo(
+        'transform',
+        'translateY(0px)',
+        `translateY(${detail.deltaY > 0 ? '100px' : '-100px'}`,
+      )
+      .fromTo('opacity', '1', '0')
+      .play();
+  }
 }

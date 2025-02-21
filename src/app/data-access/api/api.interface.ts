@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
-import { TeamModel } from '../store/models/team.model';
-import { GameSettingsModel } from '../store/models/game-settings.model';
-import { GameModel } from '../store/models/game.model';
+import { TeamModel } from '../models/team.model';
+import { GameSettingsModel } from '../models/game-settings.model';
+import { GameModel } from '../models/game.model';
 
 export interface IApi {
   getSettings(): Observable<GameSettingsModel | null>;

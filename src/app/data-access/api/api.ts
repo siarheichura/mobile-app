@@ -5,9 +5,9 @@ import { UuidService } from '@shared/services/uuid.service';
 import { IApi } from './api.interface';
 import { StorageKeys } from '../enums/storage-keys';
 import { teamNames } from '../utils/team-names';
-import { TeamModel } from '../store/models/team.model';
-import { GameSettingsModel } from '../store/models/game-settings.model';
-import { GameModel } from '../store/models/game.model';
+import { TeamModel } from '../models/team.model';
+import { GameSettingsModel } from '../models/game-settings.model';
+import { GameModel } from '../models/game.model';
 
 @Injectable({
   providedIn: 'root',

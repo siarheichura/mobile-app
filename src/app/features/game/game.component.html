@@ -1,15 +1,37 @@
-<nap-page-wrapper
-  [backButtonRoute]="routeNames.Empty"
-  [withToolbar]="true"
->
-  <div>{{ currentTeam()?.name }}</div>
+<div class="game">
+  <div class="game__top-wrap">
+    <div>{{ currentTeam()?.name }}</div>
+    <div>Угадано: {{ game()?.guessed }}</div>
+  </div>
 
-  <div>Угадано: {{ game()?.guessed }}</div>
+  <div class="game__center-wrap">
+    @if (game()?.isStarted) {
+      <div
+        #card
+        class="game__card"
+      >
+        Навзвание песни
+      </div>
 
-  <div>Навзвание песни</div>
-  <div>Навзвание звука</div>
+      <div
+        #card
+        class="game__card"
+      >
+        Навзвание звука
+      </div>
+    } @else {
+      <div
+        class="game__play-button"
+        (click)="letsPlay()"
+      >
+        Поехали!
+      </div>
+    }
+  </div>
 
-  <div>Время 00:00</div>
-
-  <div>Пропущено: {{ game()?.skipped }}</div>
-</nap-page-wrapper>
+  <div class="game__bottom-wrap">
+    <div>Пропущено: {{ game()?.skipped }}</div>
+    <div>Время 00:00</div>
+    <div>Пауза</div>
+  </div>
+</div>

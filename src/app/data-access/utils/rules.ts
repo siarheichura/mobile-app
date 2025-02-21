@@ -1,4 +1,4 @@
-import { RuleModel } from '../store/models/rule.model';
+import { RuleModel } from '../models/rule.model';
 
 export const rules: RuleModel[] = [
   {
