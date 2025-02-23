@@ -1,4 +1,4 @@
-export const teamNames: string[] = [
+export const TEAM_NAMES: string[] = [
   'Весёлые единороги',
   'Сияющие звёзды',
   'Летающие панды',

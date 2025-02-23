@@ -1,4 +1,4 @@
-export const sounds = [
+export const SOUNDS = [
   'Лай собаки',
   'Мяу кошки',
   'Гав собаки',

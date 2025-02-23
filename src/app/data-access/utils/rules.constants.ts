@@ -1,6 +1,6 @@
 import { RuleModel } from '../models/rule.model';
 
-export const rules: RuleModel[] = [
+export const RULES: RuleModel[] = [
   {
     id: 1,
     icon: 'task_alt',

@@ -15,9 +15,9 @@ import { Api } from '../api/api';
 import { TeamModel } from '../models/team.model';
 import { GameSettingsModel } from '../models/game-settings.model';
 import { RuleModel } from '../models/rule.model';
-import { rules } from '../utils/rules';
-import { defaultSettings } from '../utils/default-settings';
+import { DEFAULT_SETTINGS } from '../utils/default-settings.constants';
 import { GameModel } from '../models/game.model';
+import { RULES } from '../utils/rules.constants';
 
 export interface AppState {
   teams: TeamModel[];
@@ -56,7 +56,7 @@ export const AppStore = signalStore(
           api.getSettings().pipe(
             tapResponse({
               next: (settings) =>
-                patchState(store, { settings: settings || defaultSettings, error: null }),
+                patchState(store, { settings: settings || DEFAULT_SETTINGS, error: null }),
               error: (error) => patchState(store, { settings: null, error }),
               finalize: () => patchState(store, { isLoading: false }),
             }),
@@ -167,7 +167,7 @@ export const AppStore = signalStore(
     ),
 
     getRules() {
-      patchState(store, { rules });
+      patchState(store, { rules: RULES });
     },
 
     getGameInfo: rxMethod<void>(
@@ -223,8 +223,9 @@ export const AppStore = signalStore(
             .setGameInfo({
               round: 1,
               currentTeamId: store.firstTeam()?.id,
-              guessed: 0,
-              skipped: 0,
+              toGuess: null,
+              guessed: [],
+              skipped: [],
               isPaused: false,
               isStarted: false,
             })

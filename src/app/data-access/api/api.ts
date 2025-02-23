@@ -4,7 +4,7 @@ import { Preferences } from '@capacitor/preferences';
 import { UuidService } from '@shared/services/uuid.service';
 import { IApi } from './api.interface';
 import { StorageKeys } from '../enums/storage-keys';
-import { teamNames } from '../utils/team-names';
+import { TEAM_NAMES } from '../utils/team-names.constants';
 import { TeamModel } from '../models/team.model';
 import { GameSettingsModel } from '../models/game-settings.model';
 import { GameModel } from '../models/game.model';
@@ -60,9 +60,9 @@ export class Api implements IApi {
   }
 
   public getRandomTeamName(): string {
-    const randomIndex = Math.floor(Math.random() * teamNames.length);
+    const randomIndex = Math.floor(Math.random() * TEAM_NAMES.length);
 
-    return teamNames[randomIndex];
+    return TEAM_NAMES[randomIndex];
   }
 
   private _generateDefaultTeams(): TeamModel[] {

@@ -1,8 +1,11 @@
+import { ProgressModel } from './progress.model';
+
 export interface GameModel {
   round: number;
   currentTeamId: string;
-  guessed: number;
-  skipped: number;
+  toGuess: ProgressModel | null;
+  guessed: ProgressModel[];
+  skipped: ProgressModel[];
   isStarted: boolean;
   isPaused: boolean;
 }
