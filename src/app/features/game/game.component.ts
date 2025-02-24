@@ -63,6 +63,10 @@ export class GameComponent {
 
     void animation.play();
 
+    animation.onFinish(() => {
+      animation.destroy();
+    });
+
     if (detail.deltaY > 0) {
       this.#store.skip();
     } else if (detail.deltaY < 0) {
