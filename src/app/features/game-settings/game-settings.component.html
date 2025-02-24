@@ -9,30 +9,16 @@
   <div class="game__slider-wrap">
     <span class="game__slider-title">Количество угаданых песен для достижения победы</span>
 
-    <mat-slider
-      class="game__slider"
-      disableRipple
-      discrete
-    >
-      <input
-        matSliderThumb
-        [formControlName]="'songsAmount'"
-      />
+    <mat-slider class="game__slider" disableRipple discrete>
+      <input matSliderThumb [formControlName]="'songsAmount'" />
     </mat-slider>
   </div>
 
   <div class="game__slider-wrap">
     <span class="game__slider-title">Время раунда, сек</span>
 
-    <mat-slider
-      class="game__slider"
-      disableRipple
-      discrete
-    >
-      <input
-        matSliderThumb
-        [formControlName]="'time'"
-      />
+    <mat-slider class="game__slider" disableRipple discrete>
+      <input matSliderThumb [formControlName]="'time'" />
     </mat-slider>
   </div>
 </nap-page-wrapper>

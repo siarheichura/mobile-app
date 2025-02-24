@@ -13,10 +13,7 @@
     @if (actionButtons()) {
       <div class="page-wrapper__action-buttons">
         @for (button of actionButtons(); track button.icon) {
-          <button
-            mat-icon-button
-            (click)="actionButtonClicked.emit(button.action)"
-          >
+          <button mat-icon-button (click)="actionButtonClicked.emit(button.action)">
             <mat-icon>{{ button.icon }}</mat-icon>
           </button>
         }
