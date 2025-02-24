@@ -8,4 +8,5 @@ export interface GameModel {
   skipped: GuessItemModel[];
   isStarted: boolean;
   isPaused: boolean;
+  timer: number | null;
 }

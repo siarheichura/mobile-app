@@ -1,29 +1,23 @@
 <div class="game">
   <div class="game__top-wrap">
     <div>{{ currentTeam()?.name }}</div>
-    <div>Угадано: {{ game()?.guessed?.length }}</div>
+    <div>✅ Угадано: {{ game()?.guessed?.length }}</div>
   </div>
 
-  <div
-    #cards
-    class="game__center-wrap"
-  >
-    @if (game()?.isStarted && game()?.guess) {
+  <div #cards class="game__center-wrap">
+    @if (!game()?.isStarted) {
+      <div class="game__play-button" (click)="letsPlay()">🚀 Поехали!</div>
+    } @else if (game()?.isPaused) {
+      <div class="game__play-button" (click)="resumeGame()">🚀 Продолжить!</div>
+    } @else {
       <div class="game__card">{{ game()?.guess?.sound }}</div>
       <div class="game__card">{{ game()?.guess?.song }}</div>
-    } @else {
-      <div
-        class="game__play-button"
-        (click)="letsPlay()"
-      >
-        Поехали!
-      </div>
     }
   </div>
 
   <div class="game__bottom-wrap">
-    <div>Пропущено: {{ game()?.skipped?.length }}</div>
-    <div>Время 00:00</div>
-    <div>Пауза</div>
+    <div>🚫 Пропущено: {{ game()?.skipped?.length }}</div>
+    <div>⏱️ 00:00</div>
+    <div (click)="pauseGame()">⏸️ Пауза</div>
   </div>
 </div>

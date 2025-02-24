@@ -232,6 +232,7 @@ export const AppStore = signalStore(
                 skipped: [],
                 isPaused: false,
                 isStarted: false,
+                timer: null,
               })
               .pipe(
                 tapResponse({
@@ -345,6 +346,25 @@ export const AppStore = signalStore(
           }),
         ),
       ),
+
+      resumeGame: rxMethod<void>(
+        pipe(
+          switchMap(() => {
+            const game = store.game();
+
+            if (!game) {
+              return throwError(() => new Error('Game is not started'));
+            }
+
+            return api.setGameInfo({ ...game, isPaused: false }).pipe(
+              tapResponse({
+                next: (game) => patchState(store, { game, error: null }),
+                error: (error) => patchState(store, { game: null, error }),
+              }),
+            );
+          }),
+        ),
+      ),
     }),
   ),
 
@@ -357,3 +377,28 @@ export const AppStore = signalStore(
     },
   }),
 );
+
+// TODO: timer playground. Remove it later!
+
+// switchMap(() => {
+//   return timer(0, 1000).pipe(
+//     tap((timer) => {
+//       const game = store.game();
+//
+//       if (!game) {
+//         return throwError(() => new Error('Game is not started'));
+//       }
+//
+//       console.log('ttt', timer);
+//       console.log('sss', store.settings()?.time);
+//       console.log('result', store.settings()?.time! - timer);
+//
+//       return api.setGameInfo({ ...game, timer: store.settings()?.time! - timer }).pipe(
+//         tapResponse({
+//           next: (game) => patchState(store, { game, error: null }),
+//           error: (error) => patchState(store, { game: null, error }),
+//         }),
+//       );
+//     }),
+//   );
+// })

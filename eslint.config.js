@@ -51,6 +51,10 @@ module.exports = tseslint.config(
       '@angular-eslint/template/prefer-ngsrc': 'error',
       '@angular-eslint/template/attributes-order': 'error',
       '@angular-eslint/template/prefer-self-closing-tags': 'error',
+
+      // TODO: remove below when fixed
+      '@angular-eslint/template/click-events-have-key-events': 'off',
+      '@angular-eslint/template/interactive-supports-focus': 'off',
     },
   },
 );

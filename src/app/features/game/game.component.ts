@@ -41,6 +41,14 @@ export class GameComponent {
     this.#store.letsPlay();
   }
 
+  pauseGame(): void {
+    this.#store.pauseGame();
+  }
+
+  resumeGame(): void {
+    this.#store.resumeGame();
+  }
+
   #createGesture(element: ElementRef) {
     const gesture = this.#gestureCtrl.create({
       el: element.nativeElement,
