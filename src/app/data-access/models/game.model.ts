@@ -1,11 +1,11 @@
-import { ProgressModel } from './progress.model';
+import { GuessItemModel } from './guess-item.model';
 
 export interface GameModel {
   round: number;
   currentTeamId: string;
-  toGuess: ProgressModel | null;
-  guessed: ProgressModel[];
-  skipped: ProgressModel[];
+  guess: GuessItemModel | null;
+  guessed: GuessItemModel[];
+  skipped: GuessItemModel[];
   isStarted: boolean;
   isPaused: boolean;
 }

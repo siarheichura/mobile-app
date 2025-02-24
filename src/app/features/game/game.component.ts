@@ -5,7 +5,7 @@ import {
   effect,
   ElementRef,
   inject,
-  viewChildren,
+  viewChild,
 } from '@angular/core';
 import { GestureController, GestureDetail, AnimationController } from '@ionic/angular/standalone';
 import { AppStore } from '../../data-access/store/app.store';
@@ -22,7 +22,7 @@ export class GameComponent {
   #gestureCtrl = inject(GestureController);
   #animationCtrl = inject(AnimationController);
 
-  cards = viewChildren<ElementRef>('card');
+  cardsEl = viewChild<ElementRef>('cards');
 
   currentTeam = computed(() => this.#store.currentTeam());
   game = computed(() => this.#store.game());
@@ -31,9 +31,9 @@ export class GameComponent {
 
   constructor() {
     effect(() => {
-      this.cards().forEach((card) => {
-        this.#createGesture(card);
-      });
+      if (this.cardsEl()) {
+        this.#createGesture(this.cardsEl()!);
+      }
     });
   }
 
@@ -45,8 +45,8 @@ export class GameComponent {
     const gesture = this.#gestureCtrl.create({
       el: element.nativeElement,
       direction: 'y',
-      threshold: 50,
-      onMove: (detail) => this.#handleMove(detail, element),
+      threshold: 100,
+      onEnd: (detail) => this.#handleMove(detail, element),
       gestureName: 'swipe-up',
     });
 
@@ -54,16 +54,19 @@ export class GameComponent {
   }
 
   #handleMove(detail: GestureDetail, element: ElementRef): void {
-    void this.#animationCtrl
+    const animation = this.#animationCtrl
       .create()
       .addElement(element.nativeElement)
-      .duration(100)
-      .fromTo(
-        'transform',
-        'translateY(0px)',
-        `translateY(${detail.deltaY > 0 ? '100px' : '-100px'}`,
-      )
-      .fromTo('opacity', '1', '0')
-      .play();
+      .duration(200)
+      .to('transform', `translateY(${detail.deltaY > 0 ? '100px' : '-100px'})`)
+      .to('opacity', '0');
+
+    void animation.play();
+
+    if (detail.deltaY > 0) {
+      this.#store.skip();
+    } else if (detail.deltaY < 0) {
+      this.#store.guess();
+    }
   }
 }

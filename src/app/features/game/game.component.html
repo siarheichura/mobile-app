@@ -1,24 +1,16 @@
 <div class="game">
   <div class="game__top-wrap">
     <div>{{ currentTeam()?.name }}</div>
-    <div>Угадано: {{ game()?.guessed }}</div>
+    <div>Угадано: {{ game()?.guessed?.length }}</div>
   </div>
 
-  <div class="game__center-wrap">
-    @if (game()?.isStarted) {
-      <div
-        #card
-        class="game__card"
-      >
-        Навзвание песни
-      </div>
-
-      <div
-        #card
-        class="game__card"
-      >
-        Навзвание звука
-      </div>
+  <div
+    #cards
+    class="game__center-wrap"
+  >
+    @if (game()?.isStarted && game()?.guess) {
+      <div class="game__card">{{ game()?.guess?.sound }}</div>
+      <div class="game__card">{{ game()?.guess?.song }}</div>
     } @else {
       <div
         class="game__play-button"
@@ -30,7 +22,7 @@
   </div>
 
   <div class="game__bottom-wrap">
-    <div>Пропущено: {{ game()?.skipped }}</div>
+    <div>Пропущено: {{ game()?.skipped?.length }}</div>
     <div>Время 00:00</div>
     <div>Пауза</div>
   </div>

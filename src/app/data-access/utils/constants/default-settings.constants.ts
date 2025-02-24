@@ -1,4 +1,4 @@
-import { GameSettingsModel } from '../models/game-settings.model';
+import { GameSettingsModel } from '../../models/game-settings.model';
 
 export const DEFAULT_SETTINGS: GameSettingsModel = {
   songsAmount: 20,
