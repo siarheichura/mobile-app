@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatList, MatListItem } from '@angular/material/list';
-import { MatIconButton } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { PageWrapperComponent } from '@shared/components/page-wrapper/page-wrapper.component';
 import { ToolbarActionButton } from '@shared/components/page-wrapper/toolbar-action-button.model';
-import { AppStore } from '../../data-access/store/app.store';
 import { RouteNames } from '../../app.routes';
+import { AppStore } from '../../data-access/store/app.store';
 
 enum ToolbarActions {
   Proceed = 'proceed',

@@ -8,8 +8,8 @@ import {
   viewChild,
 } from '@angular/core';
 import { GestureController, GestureDetail, AnimationController } from '@ionic/angular/standalone';
-import { AppStore } from '../../data-access/store/app.store';
 import { RouteNames } from '../../app.routes';
+import { AppStore } from '../../data-access/store/app.store';
 
 @Component({
   selector: 'nap-game',

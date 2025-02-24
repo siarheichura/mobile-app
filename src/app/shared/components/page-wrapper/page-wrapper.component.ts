@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { RouteNames } from '../../../app.routes';

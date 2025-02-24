@@ -1,5 +1,6 @@
 import { computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { tapResponse } from '@ngrx/operators';
 import {
   patchState,
   signalStore,
@@ -9,18 +10,17 @@ import {
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { pipe, switchMap, tap, throwError } from 'rxjs';
-import { tapResponse } from '@ngrx/operators';
 import { UuidService } from '@shared/services/uuid.service';
+import { pipe, switchMap, tap, throwError } from 'rxjs';
+import { RouteNames } from '../../app.routes';
 import { Api } from '../api/api';
-import { TeamModel } from '../models/team.model';
 import { GameSettingsModel } from '../models/game-settings.model';
-import { RuleModel } from '../models/rule.model';
-import { DEFAULT_SETTINGS } from '../utils/constants/default-settings.constants';
 import { GameModel } from '../models/game.model';
+import { RuleModel } from '../models/rule.model';
+import { TeamModel } from '../models/team.model';
+import { DEFAULT_SETTINGS } from '../utils/constants/default-settings.constants';
 import { RULES } from '../utils/constants/rules.constants';
 import { getRandomGuessItem } from '../utils/helpers';
-import { RouteNames } from '../../app.routes';
 
 export interface AppState {
   teams: TeamModel[];

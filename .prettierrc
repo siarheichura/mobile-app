@@ -9,27 +9,7 @@
   "overrides": [
     {
       "files": ["**/*.css", "**/*.scss", "**/*.html"],
-      "options": {
-        "singleQuote": false
-      }
+      "options": { "singleQuote": false }
     }
-  ],
-  "plugins": ["prettier-plugin-organize-attributes"],
-  "attributeGroups": [
-    "^\\*",
-    "^\\w+(?<!data|aria|http|let)-",
-    "^(id|\\[id\\])$",
-    "^class$",
-    "^\\[class\\.",
-    "^#",
-    "^let-",
-    "$DEFAULT",
-    "^\\[[^\\(@]",
-    "^\\[\\(",
-    "^\\(",
-    "^@",
-    "^\\[@"
-  ],
-  "attributeSort": "ASC",
-  "singleAttributePerLine": true
+  ]
 }

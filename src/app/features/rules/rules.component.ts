@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { PageWrapperComponent } from '@shared/components/page-wrapper/page-wrapper.component';
-import { AppStore } from '../../data-access/store/app.store';
 import { RouteNames } from '../../app.routes';
+import { AppStore } from '../../data-access/store/app.store';
 
 @Component({
   selector: 'nap-rules',

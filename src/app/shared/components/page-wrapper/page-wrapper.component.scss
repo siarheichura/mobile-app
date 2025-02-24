@@ -15,24 +15,25 @@
   }
 
   &__back-button {
+    display: flex;
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
-    display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
+
     color: $secondary-text;
   }
 
   &__action-buttons {
+    display: flex;
     position: absolute;
     top: 0;
     right: 0;
-    height: 100%;
-    display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
 
     button {
       color: $secondary-text;
@@ -40,10 +41,11 @@
   }
 
   &__title {
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+
     color: $secondary-text;
     font-size: 14px;
     font-weight: 500;

@@ -1,13 +1,13 @@
 import { inject, Injectable } from '@angular/core';
-import { from, map, Observable } from 'rxjs';
 import { Preferences } from '@capacitor/preferences';
 import { UuidService } from '@shared/services/uuid.service';
-import { IApi } from './api.interface';
+import { from, map, Observable } from 'rxjs';
 import { StorageKeys } from '../enums/storage-keys';
-import { TEAM_NAMES } from '../utils/constants/team-names.constants';
-import { TeamModel } from '../models/team.model';
 import { GameSettingsModel } from '../models/game-settings.model';
 import { GameModel } from '../models/game.model';
+import { TeamModel } from '../models/team.model';
+import { TEAM_NAMES } from '../utils/constants/team-names.constants';
+import { IApi } from './api.interface';
 
 @Injectable({
   providedIn: 'root',

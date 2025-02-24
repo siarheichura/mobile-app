@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, Signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 import { RouteNames } from '../../app.routes';
 import { AppStore } from '../../data-access/store/app.store';
 

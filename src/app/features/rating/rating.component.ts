@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatList, MatListItem } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
+import { MatList, MatListItem } from '@angular/material/list';
+import { Router } from '@angular/router';
 import { PageWrapperComponent } from '@shared/components/page-wrapper/page-wrapper.component';
 import { ToolbarActionButton } from '@shared/components/page-wrapper/toolbar-action-button.model';
 import { RouteNames } from '../../app.routes';

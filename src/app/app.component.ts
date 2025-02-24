@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { RouterOutlet } from '@angular/router';
 import { AppStore } from './data-access/store/app.store';
 
 @Component({

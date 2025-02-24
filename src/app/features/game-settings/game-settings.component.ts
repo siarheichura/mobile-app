@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSlider, MatSliderThumb } from '@angular/material/slider';
+import { Router } from '@angular/router';
 import { PageWrapperComponent } from '@shared/components/page-wrapper/page-wrapper.component';
 import { ToolbarActionButton } from '@shared/components/page-wrapper/toolbar-action-button.model';
-import { AppStore } from '../../data-access/store/app.store';
 import { RouteNames } from '../../app.routes';
+import { AppStore } from '../../data-access/store/app.store';
 
 enum GameSettingsToolbarActions {
   Proceed = 'proceed',

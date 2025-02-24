@@ -17,11 +17,13 @@ html {
 
 * {
   box-sizing: border-box;
+
   font-family: "Montserrat", serif;
 }
 
 body {
   height: 100vh;
-  background-color: $primary-background;
   margin: 0;
+
+  background-color: $primary-background;
 }
