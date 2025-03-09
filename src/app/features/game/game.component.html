@@ -17,6 +17,9 @@
 
   <div class="game__bottom-wrap">
     <div>🚫 Пропущено: {{ game()?.skipped?.length }}</div>
+
+    ⏱️ <countdown #countdown [config]="countdownConfig" (event)="handleCountdownEvent($event)" />
+
     <div>⏱️ 00:00</div>
     <div (click)="pauseGame()">⏸️ Пауза</div>
   </div>

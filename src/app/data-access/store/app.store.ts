@@ -11,7 +11,7 @@ import {
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { UuidService } from '@shared/services/uuid.service';
-import { pipe, switchMap, tap, throwError } from 'rxjs';
+import { pipe, switchMap, tap, throwError, timer } from 'rxjs';
 import { RouteNames } from '../../app.routes';
 import { Api } from '../api/api';
 import { GameSettingsModel } from '../models/game-settings.model';
@@ -232,7 +232,7 @@ export const AppStore = signalStore(
                 skipped: [],
                 isPaused: false,
                 isStarted: false,
-                timer: null,
+                timeLeft: store.settings()?.time || 0,
               })
               .pipe(
                 tapResponse({
@@ -260,6 +260,48 @@ export const AppStore = signalStore(
               tapResponse({
                 next: (game) => patchState(store, { game, error: null }),
                 error: (error) => patchState(store, { game: null, error }),
+              }),
+              switchMap(() => {
+                return timer(0, 1000).pipe(
+                  switchMap((time) => {
+                    console.log('time: ', time);
+                    const game = store.game();
+
+                    if (!game) {
+                      return throwError(() => new Error('Game is not started'));
+                    }
+
+                    return api.setGameInfo({ ...game, timeLeft: game.timeLeft - 1 }).pipe(
+                      tapResponse({
+                        next: (game) => patchState(store, { game, error: null }),
+                        error: (error) => patchState(store, { game: null, error }),
+                      }),
+                    );
+                  }),
+                );
+
+                // switchMap(() => {
+                //   return timer(0, 1000).pipe(
+                //     tap((timer) => {
+                //       const game = store.game();
+                //
+                //       if (!game) {
+                //         return throwError(() => new Error('Game is not started'));
+                //       }
+                //
+                //       console.log('ttt', timer);
+                //       console.log('sss', store.settings()?.time);
+                //       console.log('result', store.settings()?.time! - timer);
+                //
+                //       return api.setGameInfo({ ...game, timer: store.settings()?.time! - timer }).pipe(
+                //         tapResponse({
+                //           next: (game) => patchState(store, { game, error: null }),
+                //           error: (error) => patchState(store, { game: null, error }),
+                //         }),
+                //       );
+                //     }),
+                //   );
+                // })
               }),
             );
           }),

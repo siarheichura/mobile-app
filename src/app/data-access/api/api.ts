@@ -1,5 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
+import { Storage } from '@ionic/storage-angular';
+import { StorageService } from '@shared/services/storage.service';
 import { UuidService } from '@shared/services/uuid.service';
 import { from, map, Observable } from 'rxjs';
 import { StorageKeys } from '../enums/storage-keys';
@@ -13,7 +15,8 @@ import { IApi } from './api.interface';
   providedIn: 'root',
 })
 export class Api implements IApi {
-  private _uuidService = inject(UuidService);
+  #uuidService = inject(UuidService);
+  #storage = inject(StorageService);
 
   public getSettings(): Observable<GameSettingsModel | null> {
     return from(Preferences.get({ key: StorageKeys.GameSettings })).pipe(
@@ -67,8 +70,8 @@ export class Api implements IApi {
 
   private _generateDefaultTeams(): TeamModel[] {
     return [
-      { name: this.getRandomTeamName(), id: this._uuidService.uuid(), score: 0 },
-      { name: this.getRandomTeamName(), id: this._uuidService.uuid(), score: 0 },
+      { name: this.getRandomTeamName(), id: this.#uuidService.uuid(), score: 0 },
+      { name: this.getRandomTeamName(), id: this.#uuidService.uuid(), score: 0 },
     ];
   }
 

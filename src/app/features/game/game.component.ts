@@ -8,6 +8,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { GestureController, GestureDetail, AnimationController } from '@ionic/angular/standalone';
+import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdown';
 import { RouteNames } from '../../app.routes';
 import { AppStore } from '../../data-access/store/app.store';
 
@@ -16,16 +17,24 @@ import { AppStore } from '../../data-access/store/app.store';
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CountdownComponent],
 })
 export class GameComponent {
   #store = inject(AppStore);
   #gestureCtrl = inject(GestureController);
   #animationCtrl = inject(AnimationController);
 
+  countdownEl = viewChild<CountdownComponent>('countdown');
   cardsEl = viewChild<ElementRef>('cards');
 
   currentTeam = computed(() => this.#store.currentTeam());
   game = computed(() => this.#store.game());
+
+  countdownConfig: CountdownConfig = {
+    demand: true,
+    format: 'mm:ss',
+    leftTime: 100,
+  };
 
   readonly routeNames = RouteNames;
 
@@ -33,6 +42,10 @@ export class GameComponent {
     effect(() => {
       if (this.cardsEl()) {
         this.#createGesture(this.cardsEl()!);
+      }
+
+      if (this.game()) {
+        this.countdownConfig = { ...this.countdownConfig, leftTime: this.game()?.timeLeft };
       }
     });
   }
@@ -47,6 +60,10 @@ export class GameComponent {
 
   resumeGame(): void {
     this.#store.resumeGame();
+  }
+
+  handleCountdownEvent(event: CountdownEvent): void {
+    console.log('Countdown event: ', event);
   }
 
   #createGesture(element: ElementRef) {
